@@ -4,7 +4,7 @@ Build a coverage map from provider capability evidence gathered for an explicitl
 
 ## Who, why, decision
 
-For partner/channel teams, not sales lead-generation teams. Category, geography, and partner type are required live search inputs and are included in the Google query. Only results whose title/snippet/link contain all three requested terms are fetched for corroborating public-page evidence. Returned records are tagged with source/provenance; they do not scrape personal contacts, infer provider availability, or create an account territory plan.
+For partner/channel teams, not sales lead-generation teams. Category, geography, and partner type are required live search inputs and are included in the Google query. Only results whose title/description/link contain all three requested terms are fetched for corroborating public-page evidence. Returned records are tagged with source/provenance; they do not scrape personal contacts, infer provider availability, or create an account territory plan.
 
 ## Workflow and synthetic example -> decision
 
