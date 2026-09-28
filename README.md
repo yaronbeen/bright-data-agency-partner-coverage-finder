@@ -23,7 +23,7 @@ Live use requires explicit opt-in, query inputs, `BRIGHT_DATA_API_KEY`, `BRIGHT_
 ```bash
 python3 tool.py --live --dry-run --category analytics --geography DACH --partner-type agency
 BRIGHT_DATA_API_KEY="..." BRIGHT_DATA_SERP_ZONE="..." BRIGHT_DATA_WEB_UNLOCKER_ZONE="..." \
-  python3 tool.py coverage.json --live --category analytics --geography DACH --partner-type agency --max-pages 5
+  python3 tool.py --live --category analytics --geography DACH --partner-type agency --max-pages 5
 ```
 
 Both requests are grounded in current official references: [SERP API introduction](https://docs.brightdata.com/scraping-automation/serp-api/introduction) documents `POST https://api.brightdata.com/request`, bearer auth, JSON `zone`, target `url`, `format: raw`, and `data_format: parsed_light`; the [SERP first-request guide](https://docs.brightdata.com/products/serp-api/send-your-first-request) gives the direct request structure. The [Web Unlocker API reference](https://docs.brightdata.com/api-reference/rest-api/unlocker/unlock-website) documents the direct endpoint, auth, `zone`, `url`, and `format: raw`, and returns JSON with `status_code`, `headers`, and `body`. The CLI checks both provider and target statuses and extracts only the returned page body. Check current [pricing](https://brightdata.com/pricing/serp) and Web Unlocker account access first. CI and dry-runs make no calls.
