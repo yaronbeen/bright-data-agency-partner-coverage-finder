@@ -1,0 +1,5 @@
+[
+  {"provider":"Acme Analytics Studio","region":"North America","specialties":["analytics","implementation"],"evidence_url":"https://example.com/acme/services"},
+  {"provider":"DataWorks GmbH","region":"DACH","specialties":["analytics","migration"],"evidence_url":"https://example.com/dataworks/capabilities"},
+  {"provider":"Growth Partners","region":"North America","specialties":["implementation","training"],"evidence_url":"https://example.com/growth/services"}
+]

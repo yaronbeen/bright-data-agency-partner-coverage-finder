@@ -1,0 +1,60 @@
+{
+  "provider_count": 3,
+  "regions": {
+    "North America": {
+      "providers": [
+        "Acme Analytics Studio",
+        "Growth Partners"
+      ],
+      "specialties": {
+        "analytics": 1,
+        "implementation": 2,
+        "training": 1
+      }
+    },
+    "DACH": {
+      "providers": [
+        "DataWorks GmbH"
+      ],
+      "specialties": {
+        "analytics": 1,
+        "migration": 1
+      }
+    }
+  },
+  "evidence": [
+    {
+      "provider": "Acme Analytics Studio",
+      "region": "North America",
+      "specialties": [
+        "analytics",
+        "implementation"
+      ],
+      "source_url": "https://example.com/acme/services"
+    },
+    {
+      "provider": "DataWorks GmbH",
+      "region": "DACH",
+      "specialties": [
+        "analytics",
+        "migration"
+      ],
+      "source_url": "https://example.com/dataworks/capabilities"
+    },
+    {
+      "provider": "Growth Partners",
+      "region": "North America",
+      "specialties": [
+        "implementation",
+        "training"
+      ],
+      "source_url": "https://example.com/growth/services"
+    }
+  ],
+  "gaps": "Review regions or specialties with no sourced provider; sample completeness is unknown.",
+  "limits": [
+    "Only returned search/web page evidence is represented; not an exhaustive directory.",
+    "No people or personal contact data are collected.",
+    "Provider claims and availability require direct verification."
+  ]
+}
