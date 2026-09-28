@@ -30,7 +30,12 @@
         "analytics",
         "implementation"
       ],
-      "source_url": "https://example.com/acme/services"
+      "partner_type": null,
+      "fit_rationale": null,
+      "matched_search_dimensions": null,
+      "page_corroborates_requested_service": null,
+      "source_url": "https://example.com/acme/services",
+      "provenance": "supplied evidence"
     },
     {
       "provider": "DataWorks GmbH",
@@ -39,7 +44,12 @@
         "analytics",
         "migration"
       ],
-      "source_url": "https://example.com/dataworks/capabilities"
+      "partner_type": null,
+      "fit_rationale": null,
+      "matched_search_dimensions": null,
+      "page_corroborates_requested_service": null,
+      "source_url": "https://example.com/dataworks/capabilities",
+      "provenance": "supplied evidence"
     },
     {
       "provider": "Growth Partners",
@@ -48,13 +58,19 @@
         "implementation",
         "training"
       ],
-      "source_url": "https://example.com/growth/services"
+      "partner_type": null,
+      "fit_rationale": null,
+      "matched_search_dimensions": null,
+      "page_corroborates_requested_service": null,
+      "source_url": "https://example.com/growth/services",
+      "provenance": "supplied evidence"
     }
   ],
-  "gaps": "Review regions or specialties with no sourced provider; sample completeness is unknown.",
+  "gaps": "Review requested regions or specialties with no sourced provider; absence from this bounded search is not evidence that no provider exists.",
   "limits": [
-    "Only returned search/web page evidence is represented; not an exhaustive directory.",
+    "Only returned search/page evidence is represented; not an exhaustive directory.",
     "No people or personal contact data are collected.",
     "Provider claims and availability require direct verification."
-  ]
+  ],
+  "query": null
 }

@@ -4,7 +4,7 @@ Build a coverage map from provider capability evidence gathered for an explicitl
 
 ## Who, why, decision
 
-For partner/channel teams, not sales lead-generation teams. The offline tool consumes provider records with provider name, region, specialties, and evidence URL. A live SERP + Web Unlocker workflow is intended to collect public capability evidence for explicit search inputs; it does not scrape personal contacts, infer provider availability, or create an account territory plan.
+For partner/channel teams, not sales lead-generation teams. Category, geography, and partner type are required live search inputs and are included in the Google query. Only results whose title/snippet/link contain all three requested terms are fetched for corroborating public-page evidence. Returned records are tagged with source/provenance; they do not scrape personal contacts, infer provider availability, or create an account territory plan.
 
 ## Workflow and synthetic example -> decision
 
@@ -18,11 +18,19 @@ python3 tool.py provider_evidence.json coverage.json
 python3 -m pytest -q
 ```
 
-Live collection is explicitly disabled because the official Web Unlocker request reference could not be verified during this build; `--live` fails closed and makes no request. The existing account-tested SERP CLI documents `POST https://api.brightdata.com/request` with `zone`, target URL, `brd_json=1`; see [official SERP request guide](https://docs.brightdata.com/scraping-automation/serp-api/send-your-first-request) and the sibling `bright-data-google-search-scraper`. Do not infer the Web Unlocker contract from SERP. Once enabled, bound query counts and page fetches, require operator opt-in, and check the current [pricing](https://brightdata.com/pricing).
+Live use requires explicit opt-in, query inputs, `BRIGHT_DATA_API_KEY`, `BRIGHT_DATA_SERP_ZONE`, and `BRIGHT_DATA_WEB_UNLOCKER_ZONE`. It performs one SERP request and at most five Web Unlocker fetches, with no automatic retries:
+
+```bash
+python3 tool.py --live --dry-run --category analytics --geography DACH --partner-type agency
+BRIGHT_DATA_API_KEY="..." BRIGHT_DATA_SERP_ZONE="..." BRIGHT_DATA_WEB_UNLOCKER_ZONE="..." \
+  python3 tool.py coverage.json --live --category analytics --geography DACH --partner-type agency --max-pages 5
+```
+
+Both requests are grounded in current official references: [SERP API introduction](https://docs.brightdata.com/scraping-automation/serp-api/introduction) documents `POST https://api.brightdata.com/request`, bearer auth, JSON `zone`, target `url`, `format: raw`, and `data_format: parsed_light`; the [SERP first-request guide](https://docs.brightdata.com/products/serp-api/send-your-first-request) gives the direct request structure. The [Web Unlocker API reference](https://docs.brightdata.com/api-reference/rest-api/unlocker/unlock-website) documents the direct endpoint, auth, `zone`, `url`, and `format: raw`, and returns JSON with `status_code`, `headers`, and `body`. The CLI checks both provider and target statuses and extracts only the returned page body. Check current [pricing](https://brightdata.com/pricing/serp) and Web Unlocker account access first. CI and dry-runs make no calls.
 
 ## Outputs and caveats
 
-Coverage JSON reports region/provider counts, observed specialty labels, and source URLs. Search results and publicly visible site claims may be incomplete, stale, or self-reported. Provider existence, capabilities, geography, willingness, and availability require direct validation. No completeness percentage or market census is implied.
+Coverage JSON reports providers found, an explicit requested-region/specialty status (including `no_provider_evidence_found`), matched search dimensions, rationale, and source URLs. Provider identity is represented by the source hostname; SERP titles/snippets and unlocked page bodies are not retained, avoiding accidental contact-detail output. Search results and public site claims may be incomplete, stale, or self-reported. Provider existence, capabilities, geography, willingness, and availability require direct validation. No result in a bounded query does not prove a regional or specialty gap in reality; no completeness percentage or market census is implied.
 
 ## Differentiation
 
@@ -30,7 +38,7 @@ Unlike `bright-data-territory-planner`, this maps potential service partners by 
 
 ## Safety and FAQ
 
-Only explicit public provider/category/geography inputs are in scope. No personal contact scraping or private pages. Offline sample/tests make no calls. Never commit credentials; `.env` is ignored.
+Only explicit public provider/category/geography inputs are in scope. No personal contact scraping or private/local targets. All query inputs, credentials, and page caps are validated before requests. Structured errors omit tokens; requests are not retried. Offline sample/tests and `--dry-run` make no calls. Never commit credentials; `.env` is ignored.
 
 **Is the coverage exhaustive?** No. It represents evidence supplied or returned for the requested search scope.
 
